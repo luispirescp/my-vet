@@ -1,8 +1,10 @@
 package com.br.myvet
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.br.myvet.network.RetrofitClient
@@ -13,6 +15,7 @@ import com.br.retrofity.entity.produto.ProdutoApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,13 +51,33 @@ class MainActivity : AppCompatActivity() {
                 preci = precoStr,
                 grupo = grupStr
             )
-
             CoroutineScope(Dispatchers.IO).launch {
-                 val retrofit = RetrofitClient.getCliente()
-                 val produtoApi = retrofit.create(ProdutoApi::class.java)
-                produtoApi.createProduto(produto)
-                println("=========== ${produto}")
+                try {
+                    val retrofit = RetrofitClient.getCliente()
+                    val produtoApi = retrofit.create(ProdutoApi::class.java)
+                    val response = produtoApi.createProduto(produto)
+                    withContext(Dispatchers.Main) {
+                        if (response.isSuccessful) {
+                            Toast.makeText(this@MainActivity, "Dados criados", Toast.LENGTH_LONG)
+                                .show()
+                            val intent =
+                                Intent(this@MainActivity, Ativity2RecebendoActivity::class.java)
+                            startActivity(intent)
+
+                        } else {
+                            Toast.makeText(
+                                this@MainActivity,
+                                "Erro ao criar produto",
+                                Toast.LENGTH_LONG
+                            ).show()
+                            val intent = Intent(this@MainActivity, MainActivity::class.java)
+                            startActivity(intent)
+                        }
+                    }
+                } catch (e: Exception) {
+                    println(e.message)
                 }
             }
         }
+    }
 }
