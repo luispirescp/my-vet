@@ -1,0 +1,65 @@
+package com.br.myvet
+
+import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import com.br.myvet.produto.RetrofitClient
+import com.br.retrofity.entity.produto.Produto
+import com.br.retrofity.entity.produto.ProdutoApi
+import com.br.retrofity.entity.produto.ProdutoService
+import kotlinx.coroutines.launch
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContentView(R.layout.activity_main)
+        val etName: EditText = findViewById(R.id.etNameProd)
+        val etQtd: EditText = findViewById(R.id.etQtd)
+        val etPeso: EditText = findViewById(R.id.etPeso)
+        val etFornecedor: EditText = findViewById(R.id.etFornecedor)
+        val etPrice: EditText = findViewById(R.id.etPrice)
+        val etGrup: EditText = findViewById(R.id.etGrup)
+        val btnSalvar: Button = findViewById(R.id.btnSalvar)
+
+        btnSalvar.setOnClickListener {
+            println("===     Clicou       ")
+            val name = etName.text.toString()
+            val qtdStr = etQtd.text.toString()
+            val pesoStr = etPeso.text.toString()
+            val fornecedor = etFornecedor.text.toString()
+            val precoStr = etPrice.text.toString()
+            val grupStr = etGrup.text.toString()
+            // Converter strings para inteiros
+            val qtdInt = qtdStr.toIntOrNull() ?: 0
+            val pesoInt = pesoStr.toIntOrNull() ?: 0
+
+            val produto = Produto(
+                id = 0, // Supondo que o ID será gerado pelo servidor
+                name = name,
+                qtd = qtdInt,
+                peso = pesoInt,
+                fornecedor = fornecedor,
+                preci = precoStr,
+                grupo = grupStr
+            )
+
+            // Inicie uma coroutine no lifecycleScope
+            lifecycleScope.launch {
+                try {
+                    val retrofit = RetrofitClient.getCliente()
+                    val produtoApi = retrofit.create(ProdutoApi::class.java)
+                    ProdutoService().successfulUsersResponse()
+                } catch (e: Exception) {
+                    println("${e.message}")
+                    // Lidar com exceções (por exemplo, mostrar uma mensagem de erro)
+                    Toast.makeText(this@MainActivity, "Erro: ${e.message}", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+}
