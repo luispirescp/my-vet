@@ -12,3 +12,4 @@ data class Produto(
     @JsonProperty("grupo") val grupo: String,
 )
 
+

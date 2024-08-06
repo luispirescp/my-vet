@@ -23,7 +23,6 @@ interface ProdutoApi {
     @POST("/produto")  // Substitua "produtos" pelo caminho correto da sua API
     suspend fun createProduto(@Body produto: Produto): Response<Produto>
 
-
     @DELETE("/delete-produto/{id}")
     fun deleteProduto(@Path("id") id: Int): Call<Unit?>
 

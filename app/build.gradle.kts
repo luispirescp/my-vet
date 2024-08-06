@@ -47,6 +47,8 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web
 //    implementation("org.springframework.boot:spring-boot-starter-web:3.2.8")
+// https://mvnrepository.com/artifact/com.squareup.okhttp/logging-interceptor
+    implementation("com.squareup.okhttp:logging-interceptor:2.7.5")
 
     // https://mvnrepository.com/artifact/com.squareup.retrofit2/retrofit
     implementation("com.squareup.retrofit2:retrofit:2.11.0")

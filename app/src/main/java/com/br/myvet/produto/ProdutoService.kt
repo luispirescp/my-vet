@@ -2,7 +2,7 @@ package com.br.retrofity.entity.produto
 
 
 
-import com.br.myvet.produto.RetrofitClient
+import com.br.myvet.network.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -11,10 +11,18 @@ class ProdutoService {
 
     private val retrofit = RetrofitClient.getCliente()
     private val produtoApi = retrofit.create(ProdutoApi::class.java)
-     suspend fun successfulUsersResponse() {
 
+    fun  getProduto(produto_: Produto):Produto{
+        println("  Get Produto ")
+        var produto = Produto(2,"Elias",45,8,"t", "4","8")
+        produto = produto_
+
+        return produto_
+    }
+     suspend fun successfulUsersResponse() {
         println(" Service ")
-            val produto = Produto(2,"fsdf",45,8,"t", "4","8")
+            val produto = Produto(2,"Elias",45,8,"t", "4","8")
+
             produtoApi.createProduto(produto)
     }
     //

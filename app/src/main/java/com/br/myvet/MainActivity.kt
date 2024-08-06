@@ -3,14 +3,15 @@ package com.br.myvet
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
-import com.br.myvet.produto.RetrofitClient
+import com.br.myvet.network.RetrofitClient
+
+
 import com.br.retrofity.entity.produto.Produto
 import com.br.retrofity.entity.produto.ProdutoApi
-import com.br.retrofity.entity.produto.ProdutoService
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -39,7 +40,7 @@ class MainActivity : AppCompatActivity() {
             val pesoInt = pesoStr.toIntOrNull() ?: 0
 
             val produto = Produto(
-                id = 0, // Supondo que o ID será gerado pelo servidor
+                id = 1, // Supondo que o ID será gerado pelo servidor
                 name = name,
                 qtd = qtdInt,
                 peso = pesoInt,
@@ -48,18 +49,12 @@ class MainActivity : AppCompatActivity() {
                 grupo = grupStr
             )
 
-            // Inicie uma coroutine no lifecycleScope
-            lifecycleScope.launch {
-                try {
-                    val retrofit = RetrofitClient.getCliente()
-                    val produtoApi = retrofit.create(ProdutoApi::class.java)
-                    ProdutoService().successfulUsersResponse()
-                } catch (e: Exception) {
-                    println("${e.message}")
-                    // Lidar com exceções (por exemplo, mostrar uma mensagem de erro)
-                    Toast.makeText(this@MainActivity, "Erro: ${e.message}", Toast.LENGTH_SHORT).show()
+            CoroutineScope(Dispatchers.IO).launch {
+                 val retrofit = RetrofitClient.getCliente()
+                 val produtoApi = retrofit.create(ProdutoApi::class.java)
+                produtoApi.createProduto(produto)
+                println("=========== ${produto}")
                 }
             }
         }
-    }
 }

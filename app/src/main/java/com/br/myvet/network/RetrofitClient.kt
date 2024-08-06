@@ -1,4 +1,4 @@
-package com.br.myvet.produto
+package com.br.myvet.network
 
 import retrofit2.Retrofit
 import retrofit2.converter.jackson.JacksonConverterFactory
@@ -6,7 +6,7 @@ import retrofit2.converter.jackson.JacksonConverterFactory
 object RetrofitClient {
 
 
-    private  const val BASE_URL = "http://127.0.0.1:5000"
+    private  const val BASE_URL = "http://10.0.2.2:5000"
     private val retrofit by lazy {
         println("chamando base")
         Retrofit.Builder()
