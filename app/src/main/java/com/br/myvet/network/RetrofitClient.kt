@@ -14,7 +14,6 @@ object RetrofitClient {
             .addConverterFactory(JacksonConverterFactory.create())
             .build()
     }
-
     fun getCliente(): Retrofit {
         return retrofit
     }

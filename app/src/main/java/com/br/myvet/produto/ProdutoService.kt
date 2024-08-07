@@ -9,22 +9,22 @@ import retrofit2.Response
 
 class ProdutoService {
 
-    private val retrofit = RetrofitClient.getCliente()
-    private val produtoApi = retrofit.create(ProdutoApi::class.java)
-
-    fun  getProduto(produto_: Produto):Produto{
-        println("  Get Produto ")
-        var produto = Produto(2,"Elias",45,8,"t", "4","8")
-        produto = produto_
-
-        return produto_
-    }
-     suspend fun successfulUsersResponse() {
-        println(" Service ")
-            val produto = Produto(2,"Elias",45,8,"t", "4","8")
-
-            produtoApi.createProduto(produto)
-    }
+//    private val retrofit = RetrofitClient.getCliente()
+//    private val produtoApi = retrofit.create(ProdutoApi::class.java)
+//
+//    fun  getProduto(produto_: Produto):Produto{
+//        println("  Get Produto ")
+//        var produto = Produto(2,"Elias",45,8,"t", "4","8")
+//        produto = produto_
+//
+//        return produto_
+//    }
+//     suspend fun successfulUsersResponse() {
+//        println(" Service ")
+//            val produto = Produto(2,"Elias",45,8,"t", "4","8")
+//
+//            produtoApi.createProduto(produto)
+//    }
     //
     //app de standup artista -- stilo do standup
     //
@@ -55,22 +55,22 @@ class ProdutoService {
 
 
 
-    private fun produtoUpdate(produto: Produto) {
-        produtoApi.updateProduto(5,produto)
-            .enqueue(object : Callback<Produto> {
-                override fun onResponse(call: Call<Produto>, response: Response<Produto>) {
-                    val updateProduto = response.body()
-                    if (response.isSuccessful) {
-                        println("Prodtuto update $updateProduto")
-                    } else {
-                        println("Update failed: ${response.errorBody()?.string()}")
-                    }
-                }
-
-                override fun onFailure(call: Call<Produto>, t: Throwable) {
-                    println("request failed : ${t.message}")
-                }
-            })
-    }
+//    private fun produtoUpdate(produto: Produto) {
+//        produtoApi.updateProduto(5,produto)
+//            .enqueue(object : Callback<Produto> {
+//                override fun onResponse(call: Call<Produto>, response: Response<Produto>) {
+//                    val updateProduto = response.body()
+//                    if (response.isSuccessful) {
+//                        println("Prodtuto update $updateProduto")
+//                    } else {
+//                        println("Update failed: ${response.errorBody()?.string()}")
+//                    }
+//                }
+//
+//                override fun onFailure(call: Call<Produto>, t: Throwable) {
+//                    println("request failed : ${t.message}")
+//                }
+//            })
+//    }
 }
 

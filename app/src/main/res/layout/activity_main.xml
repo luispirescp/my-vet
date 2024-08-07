@@ -5,109 +5,156 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:layout_marginTop="2dp"
+    android:background="@color/orangeWhai"
+    tools:context=".Activity.MainActivity">
 
-
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="275dp"
-        android:layout_height="44dp"
-        android:layout_marginTop="40dp"
-        android:hint=""
-        android:text="Cadastar Produto"
-        android:textAlignment="center"
-        android:textSize="28dp"
-        android:tooltipText="@string/material_motion_easing_decelerated"
-        app:layout_constraintBottom_toTopOf="@+id/etNameProd"
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="391dp"
+        android:layout_height="222dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/ic_launcher_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
-        >
-
-    </TextView>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/etGrup"
-        android:layout_width="264dp"
-        android:layout_height="67dp"
-        android:layout_marginBottom="40dp"
-        android:hint="Digite o Grupo:"
+        android:id="@+id/etNameProd"
+        android:layout_width="317dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="14dp"
+        android:background="@drawable/rounded_border"
+        android:gravity="center"
+        android:hint="Digite o Nome do Produto"
         android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/btnSalvar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.108"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.17"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <EditText
+        android:id="@+id/etFornecedor"
+        android:layout_width="317dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/rounded_border"
+        android:gravity="center"
+        android:hint="Digite o Fornecedor:"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="@+id/etPrice"
+        app:layout_constraintTop_toBottomOf="@+id/etQtd" />
 
     <EditText
         android:id="@+id/etQtd"
-        android:layout_width="260dp"
-        android:layout_height="58dp"
-        android:layout_marginBottom="12dp"
+        android:layout_width="175dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/rounded_border"
+        android:gravity="center"
         android:hint="Digite a quantidade:"
         android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@+id/etPeso"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.105"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/etPeso"
+        app:layout_constraintTop_toBottomOf="@+id/etNameProd" />
 
     <EditText
         android:id="@+id/etPrice"
         android:layout_width="264dp"
         android:layout_height="67dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/rounded_border"
+        android:gravity="center"
         android:hint="Digite o Preco:"
         android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/etGrup"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.108"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/etGrup"
+        app:layout_constraintTop_toBottomOf="@+id/etFornecedor" />
 
     <EditText
-        android:id="@+id/etFornecedor"
+        android:id="@+id/etGrup"
         android:layout_width="264dp"
         android:layout_height="67dp"
-        android:layout_marginBottom="12dp"
-        android:hint="Digite o Fornecedor:"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rounded_border"
+        android:gravity="center"
+        android:hint="Digite o Grupo:"
         android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/etPrice"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.108"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etPrice" />
 
     <EditText
         android:id="@+id/etPeso"
-        android:layout_width="260dp"
-        android:layout_height="67dp"
-        android:layout_marginBottom="20dp"
+        android:layout_width="180dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/rounded_border"
+        android:gravity="center"
         android:hint="Digite o peso:"
         android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@+id/etFornecedor"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.105"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textColor="#3E2E2E"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etNameProd" />
 
     <Button
         android:id="@+id/btnSalvar"
-        android:layout_width="120dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="84dp"
+        android:layout_width="157dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="29dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#E5D8D8"
+        android:shadowColor="@color/white"
         android:text="Salvar"
+        android:textColor="#1B32A1"
+        android:textSize="17dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.054"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.222"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etGrup" />
 
-    <EditText
-        android:id="@+id/etNameProd"
-        android:layout_width="263dp"
-        android:layout_height="57dp"
-        android:layout_marginBottom="8dp"
-        android:hint="Digite o Nome do Produto"
-        android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/etQtd"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.114"
-        app:layout_constraintStart_toStartOf="parent" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/tvLabelqtd"-->
+    <!--        android:layout_width="117dp"-->
+    <!--        android:layout_height="23dp"-->
+    <!--        android:layout_marginStart="44dp"-->
+    <!--        android:layout_marginTop="24dp"-->
+    <!--        android:background="@drawable/text_gradient"-->
+    <!--        android:text="Peso"-->
+    <!--        android:textAlignment="center"-->
+    <!--        android:textColor="#393535"-->
+    <!--        app:layout_constraintEnd_toStartOf="@+id/etPeso"-->
+    <!--        app:layout_constraintHorizontal_bias="0.0"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/etQtd"-->
+    <!--        tools:ignore="MissingConstraints" />-->
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/tvLabelqtd"-->
+    <!--        android:layout_width="117dp"-->
+    <!--        android:layout_height="23dp"-->
+    <!--        android:layout_marginStart="44dp"-->
+    <!--        android:layout_marginTop="16dp"-->
+    <!--        android:background="@drawable/text_gradient"-->
+    <!--        android:text="Quantidade"-->
+    <!--        android:textAlignment="center"-->
+    <!--        android:textColor="#393535"-->
+    <!--        app:layout_constraintEnd_toStartOf="@+id/etQtd"-->
+    <!--        app:layout_constraintHorizontal_bias="0.0"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/etNameProd"-->
+    <!--        tools:ignore="MissingConstraints" />-->
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

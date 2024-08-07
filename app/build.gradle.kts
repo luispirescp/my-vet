@@ -45,19 +45,15 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web
-//    implementation("org.springframework.boot:spring-boot-starter-web:3.2.8")
-// https://mvnrepository.com/artifact/com.squareup.okhttp/logging-interceptor
+    
     implementation("com.squareup.okhttp:logging-interceptor:2.7.5")
 
-    // https://mvnrepository.com/artifact/com.squareup.retrofit2/retrofit
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
-    // https://mvnrepository.com/artifact/com.squareup.retrofit2/converter-jackson
     implementation("com.squareup.retrofit2:converter-jackson:2.11.0")
-
-    // https://mvnrepository.com/artifact/com.squareup.retrofit2/converter-gson
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
+    runtimeOnly("com.google.android.material:material:1.12.0")
 
-
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
+    implementation("androidx.recyclerview:recyclerview-selection:1.1.0")
 }
