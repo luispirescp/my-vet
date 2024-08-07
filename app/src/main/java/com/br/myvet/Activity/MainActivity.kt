@@ -1,12 +1,14 @@
-package com.br.myvet
+package com.br.myvet.Activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Gravity
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import com.br.myvet.R
 import com.br.myvet.network.RetrofitClient
 
 
@@ -19,6 +21,9 @@ import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        val retrofit = RetrofitClient.getCliente()
+        val produtoApi = retrofit.create(ProdutoApi::class.java)
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
@@ -28,9 +33,26 @@ class MainActivity : AppCompatActivity() {
         val etFornecedor: EditText = findViewById(R.id.etFornecedor)
         val etPrice: EditText = findViewById(R.id.etPrice)
         val etGrup: EditText = findViewById(R.id.etGrup)
-        val btnSalvar: Button = findViewById(R.id.btnSalvar)
+        val btnSave: Button = findViewById(R.id.btnSalvar)
 
-        btnSalvar.setOnClickListener {
+        fun clearFields() {
+            val etName: EditText = findViewById(R.id.etNameProd)
+            val etQtd: EditText = findViewById(R.id.etQtd)
+            val etPeso: EditText = findViewById(R.id.etPeso)
+            val etFornecedor: EditText = findViewById(R.id.etFornecedor)
+            val etPrice: EditText = findViewById(R.id.etPrice)
+            val etGrup: EditText = findViewById(R.id.etGrup)
+
+            // Limpa o texto de cada EditText
+            etName.setText("")
+            etQtd.setText("")
+            etPeso.setText("")
+            etFornecedor.setText("")
+            etPrice.setText("")
+            etGrup.setText("")
+        }
+
+        btnSave.setOnClickListener {
             println("===     Clicou       ")
             val name = etName.text.toString()
             val qtdStr = etQtd.text.toString()
@@ -51,27 +73,43 @@ class MainActivity : AppCompatActivity() {
                 preci = precoStr,
                 grupo = grupStr
             )
+            val inflater = layoutInflater
+            val layoutSucesso = inflater.inflate(R.layout.toast_sucesso, null)
+            val layoutFalha = inflater.inflate(R.layout.toast_falha, null)
+
+            val toastSucesso = Toast(applicationContext)
+            val toastFalha = Toast(applicationContext)
+            toastSucesso.view = layoutSucesso
+            toastFalha.view = layoutFalha
+            toastSucesso.duration = Toast.LENGTH_SHORT
+            toastFalha.duration = Toast.LENGTH_SHORT
+
+
             CoroutineScope(Dispatchers.IO).launch {
                 try {
-                    val retrofit = RetrofitClient.getCliente()
-                    val produtoApi = retrofit.create(ProdutoApi::class.java)
                     val response = produtoApi.createProduto(produto)
                     withContext(Dispatchers.Main) {
                         if (response.isSuccessful) {
-                            Toast.makeText(this@MainActivity, "Dados criados", Toast.LENGTH_LONG)
-                                .show()
+                            toastSucesso.setGravity(
+                                Gravity.CENTER_HORIZONTAL or Gravity.CENTER_HORIZONTAL,
+                                0,
+                                0
+                            )
+                            toastSucesso.show()
                             val intent =
-                                Intent(this@MainActivity, Ativity2RecebendoActivity::class.java)
+                                Intent(this@MainActivity, ShowDataActivity::class.java)
                             startActivity(intent)
-
+                            clearFields()
                         } else {
-                            Toast.makeText(
-                                this@MainActivity,
-                                "Erro ao criar produto",
-                                Toast.LENGTH_LONG
-                            ).show()
+                            toastFalha.setGravity(
+                                Gravity.CENTER_HORIZONTAL or Gravity.CENTER_HORIZONTAL,
+                                0,
+                                0
+                            )
+                            toastFalha.show()
                             val intent = Intent(this@MainActivity, MainActivity::class.java)
                             startActivity(intent)
+                            clearFields()
                         }
                     }
                 } catch (e: Exception) {

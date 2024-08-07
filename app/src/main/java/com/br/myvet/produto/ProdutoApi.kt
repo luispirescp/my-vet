@@ -16,7 +16,7 @@ interface ProdutoApi {
     @GET("/produtos")
     fun getAllProductos(): Call<List<Produto>>
 
-    @GET("/v1/produto")
+    @GET("/produtos")
     fun getProduto(): Call<Produto>
 
     @Headers("Content-Type: application/json")
